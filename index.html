@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/672f28c81d2f8874971c07bd/1731143881648/Screenshot%2B2024-11-03%2Bat%2B12.07.17%2BPM.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        /* main-content-section */
+        .main-content-section {
+            height: auto;
+            margin: 0 auto;
+            color: #fff;
+            overflow: hidden;
+
+        }
+
+        .section-wrapper-all {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            height: 100%;
+        }
+
+        .slider-content-main-div {
+            text-align: start;
+            color: #fff;
+            width: 40%;
+            margin-bottom: 30px !important;
+        }
+
+        .lead-slider-card-wrapper {
+            width: 60%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-top-subheading {
+            width: 400px;
+            font-size: 18px;
+            font-weight: 400 !important;
+            font-family: Anton, sans-serif;
+            margin-bottom: 30px !important;
+            text-align: start !important;
+        }
+
+        .slider-main-heading {
+            font-family: Anton, sans-serif;
+            font-size: 44px;
+            font-weight: 400;
+            line-height: 52px;
+            text-align: start !important;
+        }
+
+        .heading-span {
+            color: #DDC80D;
+        }
+
+        .slider-main-button,
+        .meet-button {
+            background: #DDC80D;
+            color: #000;
+            padding: 14px 40px;
+            margin-left: 0px !important;
+
+        }
+
+        .meet-button {
+            color: #fff !important;
+            background: #000;
+            text-transform: uppercase;
+        }
+
+        .meet-button:hover {
+            color: #DDC80D !important;
+        }
+
+        .mian-overlay-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            text-align: center;
+            background-color: #ddc80dd5;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: 3s ease;
+            color: #000000 !important;
+        }
+
+        .hover-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 60px 20px;
+            gap: 20px;
+            transition: 0.3s ease;
+        }
+
+        .team-members-title {
+            color: #000 !important;
+            font-size: 30px;
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 0;
+            border-bottom: 5px solid;
+        }
+
+        .team-sort-des {
+            font-family: Lato, sans-serif;
+            font-size: 16px;
+            padding-bottom: 10px;
+        }
+
+        .team-card-div .mian-overlay-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(221, 200, 13, 0.842);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .slider-card-box-body:hover .mian-overlay-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* .team-card-div:hover .mian-overlay-content {
+            display: block;
+            transition: 0.3s ease !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 3s ease;
+        } */
+
+        /* Slider track */
+        .slider-conent-track {
+            display: flex;
+            gap: 60px;
+            transition: transform 0.5s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .team-card-div {
+            width: 280px;
+            height: 400px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            padding: 40px 20px;
+            position: relative;
+            transition: 3s ease;
+            cursor: pointer;
+
+        }
+
+        /* Here is the slider card background image change style */
+        .team-card-div.slided-card-1 {
+            background: linear-gradient(#00000027, #00000027), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/67307660ce6615151591bbb2/1731229281851/Screenshot-2021-05-05-at-1.20.48-PM.png);
+        }
+
+        .team-card-div.slided-card-2 {
+            background: linear-gradient(#00000027, #00000027), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/673076bb5980f12786f359fe/1731229371509/PHOTO-2022-05-04-12-21-43.jpg);
+        }
+
+        .team-card-div.slided-card-3 {
+            background: linear-gradient(#00000027, #00000027), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/67307724fdfc623ac52a20bb/1731229476382/MeganPortrait.jpg);
+        }
+
+        .team-card-div.slided-card-4 {
+            background: linear-gradient(#00000027, #00000027), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/67307706d2edd321b47c7e1e/1731229446556/B-headshot.jpg);
+        }
+
+        .team-card-div.slided-card-5 {
+            background: linear-gradient(#00000027, #00000027), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/673076e46a71d8358d49ee6a/1731229413330/Screen-Shot-2021-03-03-at-10.22.46-PM.png);
+        }
+
+        .team-card-div.slided-card-6 {
+            background: linear-gradient(#00000030, #00000030), url(https://static1.squarespace.com/static/672c43a5b17fca0188bf53b6/t/673077574b277e7f30746586/1731229527616/IMG_1146.jpg);
+        }
+
+
+        .team-card-div .slider-box-sub-heading {
+            width: 50%;
+            margin: 0 auto;
+            color: #FFF;
+            font-family: Lato, sans-serif;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+            border-bottom: 4px solid #DDC80D;
+            padding-bottom: 2px;
+        }
+
+
+        .slider-bottom-controler-box {
+            display: flex;
+            justify-content: start;
+            margin-top: 100px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            align-items: start !important;
+        }
+
+        button:hover {
+            color: #fff !important;
+            transition: 0.5s ease;
+            background-color: #000000 !important;
+        }
+
+        .nextBtn,
+        .prevBtn {
+            padding: 10px 15px !important;
+            font-size: 22px;
+            border: 1px solid #DDC80D;
+            color: #fff;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        /* Responsive styles for small devices */
+        @media (max-width: 768px) {
+            .main-content-section {
+                height: 100%;
+                width: 100% !important;
+            }
+
+            .section-wrapper-all {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .slider-content-main-div {
+                width: 100%;
+            }
+
+            .slider-main-heading {
+                font-size: 28px;
+                line-height: 40px;
+            }
+
+            .lead-slider-card-wrapper {
+                width: 105% !important;
+                margin: 0 auto !important;
+            }
+
+            .slider-conent-track {
+                gap: 40px;
+            }
+
+            .team-card-div {
+                width: 280px;
+                height: 400px;
+                margin: 0 auto !important;
+                transition: 3s ease;
+            }
+
+            .slider-bottom-controler-box {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .slider-main-button {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 576px) {
+            .slider-conent-track {
+                gap: 60px;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .team-card-div {
+                max-width: 100% !important;
+                height: 400px;
+                margin: 0 auto !important;
+            }
+
+            .slider-bottom-controler-box {
+                justify-content: left;
+                gap: 30px;
+                margin-right: 0;
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content-section">
+        <div class="section-wrapper-all">
+            <!-- Left section: Text content -->
+            <div class="slider-content-main-div">
+                <h2 class="slider-main-heading">MEET THE <span class="heading-span">TEAM</span></h2>
+                <p class="slider-top-subheading">Our team of expert trainers have a wealth of knowledge and experience
+                    to help you reach your fitness goals, whatever they may be. Work closely with them in our group
+                    fitness classes or one-on-one in your private training sessions.</p>
+                <button class="slider-main-button">GET TO KNOW OUR TRAINERS</button>
+
+                <div class="slider-bottom-controler-box">
+                    <button onclick="handlePrevBtn()" class="prevBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button onclick="handleNextBtn()" class="nextBtn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Right section: Slider Cards content -->
+            <div class="lead-slider-card-wrapper">
+                <div class="slider-conent-track" id="sliderContentTrack">
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-1">
+                            <p class="slider-box-sub-heading">Meet Xiomara</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">DANIELLA</h2>
+                                    <p class="team-sort-des">A great workout can be the most important
+                                        thing you achieve in your day.
+                                        minutes for yourself, switåirg off from the
+                                        stress and anxiety of a ciutic world øn
+                                        reset pur entire and irrrease your ser-
+                                        estean, a-ergy, and</p>
+                                    <button class="meet-button">Meet DANIELLA</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-2">
+                            <p class="slider-box-sub-heading">LEAH</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">LEAH</h2>
+                                    <p class="team-sort-des">Take care Of pur body, it'S the only place
+                                        you have to live</p>
+                                    <button class="meet-button">Meet LEAH</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-3">
+                            <p class="slider-box-sub-heading">MEGAN</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">MEGAN</h2>
+                                    <p class="team-sort-des">Bodies are meant to move. Make your
+                                        movements count</p>
+                                    <button class="meet-button">Meet MEGAN</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-4">
+                            <p class="slider-box-sub-heading">BELLA</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">BELLA</h2>
+                                    <p class="team-sort-des">You can choose the &llenge, or you can
+                                        cmfort, but you cannot choose both</p>
+                                    <button class="meet-button">Meet BELLA</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-5">
+                            <p class="slider-box-sub-heading">SAMI</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">SAMI</h2>
+                                    <p class="team-sort-des">Health is wealth. Make it a</p>
+                                    <button class="meet-button">Meet SAMI</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card-box-body">
+                        <div class="team-card-div slided-card-6">
+                            <p class="slider-box-sub-heading">DANIELLA</p>
+                            <div class="mian-overlay-content">
+                                <div class="hover-content">
+                                    <h2 class="team-members-title">DANIELLA</h2>
+                                    <p class="team-sort-des">A great workout can be the most important
+                                        thing you achieve in your day.
+                                        minutes for yourself, switåirg off from the
+                                        stress and anxiety of a ciutic world øn
+                                        reset pur entire and irrrease your ser-
+                                        estean, a-ergy, and</p>
+                                    <button class="meet-button">Meet DANIELLA</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const sliderContentTrack = document.getElementById('sliderContentTrack');
+        const sliderItems = document.querySelectorAll('.slider-card-box-body');
+        const totalItems = sliderItems.length;
+        const slideWidth = sliderItems[0].offsetWidth + 50; // including gap of 20px
+
+        function handleNextBtn() {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
+                sliderContentTrack.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+            }
+        }
+
+        function handlePrevBtn() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                sliderContentTrack.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+            }
+        }
+
+        // Dynamically update slideWidth on resize for mobile responsiveness
+        window.addEventListener('resize', () => {
+            const newSlideWidth = sliderItems[0].offsetWidth + 0;
+            sliderContentTrack.style.transform = `translateX(-${newSlideWidth * currentIndex}px)`;
+        });
+    </script>
+
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+</body>
+
+</html>

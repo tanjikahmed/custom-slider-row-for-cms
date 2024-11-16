@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Column Slider</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .slider-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slider-controls {
+            width: 40%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slider-controls h1 {
+            margin-bottom: 20px;
+        }
+
+        .slider-controls p {
+            margin-bottom: 20px;
+        }
+
+        .control-buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .slider {
+            width: 60%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            /* Vertically center track */
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-card {
+            width: 400px;
+            height: 600px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Vertically center content */
+            align-items: center;
+            /* Horizontally center content */
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 20px;
+            border: 1px solid saddlebrown;
+        }
+
+        .slider-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .slider-card p {
+            margin-bottom: 20px;
+        }
+
+        .slider-card button {
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-container">
+        <!-- Column 1: Text and Controls -->
+        <div class="slider-controls">
+            <h1>Slider Title</h1>
+            <p>Here is a summary of the slider content. This section provides context or a description.</p>
+            <div class="control-buttons">
+                <button id="prev">Previous</button>
+                <button id="next">Next</button>
+            </div>
+        </div>
+
+        <!-- Column 2: Slider Cards -->
+        <div class="slider">
+            <div class="slider-track">
+                <div class="slider-card" style="background-image: url('image1.jpg');">
+                    <h2>Card 1 Title</h2>
+                    <p>Short description for card 1.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="slider-card" style="background-image: url('image2.jpg');">
+                    <h2>Card 2 Title</h2>
+                    <p>Short description for card 2.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="slider-card" style="background-image: url('image3.jpg');">
+                    <h2>Card 3 Title</h2>
+                    <p>Short description for card 3.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="slider-card" style="background-image: url('image4.jpg');">
+                    <h2>Card 4 Title</h2>
+                    <p>Short description for card 4.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="slider-card" style="background-image: url('image5.jpg');">
+                    <h2>Card 5 Title</h2>
+                    <p>Short description for card 5.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="slider-card" style="background-image: url('image6.jpg');">
+                    <h2>Card 6 Title</h2>
+                    <p>Short description for card 6.</p>
+                    <button>Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const sliderTrack = document.querySelector('.slider-track');
+        const cards = document.querySelectorAll('.slider-card');
+
+        let currentIndex = 0;
+
+        const updateSliderPosition = () => {
+            // Dynamically calculate the card width and gap
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseInt(getComputedStyle(sliderTrack).gap) || 20; // Default gap to 20px
+            sliderTrack.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+        };
+
+        nextButton.addEventListener('click', () => {
+            // Ensure the index does not exceed the number of cards
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                updateSliderPosition();
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            // Ensure the index does not go below zero
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
